@@ -10,6 +10,7 @@ public class Date {
 	private int year;
 	
 	
+	
 	public Date(int day, int month, int year){
 
 		this.day = day;
@@ -58,7 +59,7 @@ public class Date {
 
 //SAME DATE
 	boolean isSame(Date unaFecha){
-		if(dia==unaFecha.dia && mes==unaFecha.mes && año==unaFecha.año){
+		if(day==unaFecha.day && month==unaFecha.month && year==unaFecha.year){
 			return true;
 		}
 		return false;
@@ -78,14 +79,14 @@ public boolean isSameDayWithOutIf(int day){
 }
 
 public boolean isSameWithOutIf(Date unaFecha){
-	return (dia == unaFecha.dia && mes == unaFecha.mes && año == unaFecha.año);
+	return (day == unaFecha.day && month == unaFecha.month && year == unaFecha.year);
 }
 
 //IMPRIME EL NOMBRE DEL MES
-	public String getMonthName(){
-		String month= "";
+	public String getMonthName(int month){
+		String mes= "";
 
-		swich(this.month){
+		switch(this.month){
 			case 1: mes="ENERO";
 				break;
 			case 2: mes="FEBRERO";
@@ -111,7 +112,7 @@ public boolean isSameWithOutIf(Date unaFecha){
 			case 12: mes="DICIEMBRE";
 				break;
 		}
-	return month;
+	return mes;
 	}
 	
 //VERIFICA SI ELDIA DELMES ES CORRECTO
@@ -139,50 +140,50 @@ public boolean isSameWithOutIf(Date unaFecha){
 		String season="";
 
 		switch(month){
-			case 1: season="Estación: INVIERNO";
+			case 1: season="Estacion: INVIERNO";
 				break;
-			case 2: season="Estación: INVIERNO";
+			case 2: season="Estacion: INVIERNO";
 				break;
 			case 3: 
 				if (this.day<=21){
-					season="Estación: INVIERNO";
+					season="Estacion: INVIERNO";
 				}
 				else{
-					season="Estación: PRIMAVERA";
+					season="Estacion: PRIMAVERA";
 				}
 				break;
-			case 4: season="Estación: PRIMAVERA";
+			case 4: season="Estacion: PRIMAVERA";
 				break;
-			case 5: season="Estación: PRIMAVERA";
+			case 5: season="Estacion: PRIMAVERA";
 				break;
 			case 6: 
 				if (this.day<=21){
-					season="Estación: PRIMAVERA";
+					season="Estacion: PRIMAVERA";
 				}
 				else{
-					season="Estación: VERANO";
+					season="Estacion: VERANO";
 				}
 				break;
-			case 7: season="Estación: VERANO";
+			case 7: season="Estacion: VERANO";
 				break;
-			case 8: season="Estación: VERANO";
+			case 8: season="Estacion: VERANO";
 				break;
 			case 9: if (this.day<=21){
-					season="Estación: VERANO";
+					season="Estacion: VERANO";
 				}
 				else{
-					season="Estación: OTOÑO";
+					season="Estacion: OTOÑO";
 				}
 				break;
-			case 10: season="Estación: OTOÑO";
+			case 10: season="Estacion: OTOÑO";
 				break;
-			case 11: season="Estación: OTOÑO";
+			case 11: season="Estacion: OTOÑO";
 				break;
 			case 12:if (this.day<=21){
-					season="Estación: OTOÑO";
+					season="Estacion: OTOÑO";
 				}
 				else{
-					season="Estación: INVIERNO";
+					season="Estacion: INVIERNO";
 				}
 				break;
 			}
@@ -190,7 +191,7 @@ public boolean isSameWithOutIf(Date unaFecha){
 	}
 
 //IMPRIME LOS MESES QUE FALTAN HASTA FINAL DE AÑO
-	public int mesesHastaFinalDeAño(int month){
+	public int mesesHastaFinalDeAo(int month){
 		int i,j=0;
 			for(i=month; i<=12; i++){
 				j++;
@@ -200,15 +201,20 @@ public boolean isSameWithOutIf(Date unaFecha){
 
 //IMPRIMEUNA FECHA
 	public void imprimirFecha(Date fecha){
-		String mesString=pasarMesString(fecha.mes);
-		System.out.println(fecha.dia+" de " +mesString+" de "+fecha.año);
+		String mesString=pasarMesString(fecha.month);
+		System.out.println(fecha.day+" de " +mesString+" de "+fecha.year);
 	}
 
+	private String pasarMesString(int month2) {
+
+		return null;
+}
+
 //DIAS DESDE EL PRIMER DEL AÑO
-	public int diasTranscurridosAño(Date fecha){
+	public int diasTranscurridosAño(int Date ){
 		int diasTotales = 0;
 
-		switch(fecha.mes){
+		switch(Date){
 
 			case 1:diasTotales=0;
 				break;
@@ -237,55 +243,45 @@ public boolean isSameWithOutIf(Date unaFecha){
 		
 		
 		}
-		diasTotales+=fecha.dia;
-		System.out.println("Han transcurrido "+diasTotales+" desde principio de año ");
+		diasTotales=Date+this.day;
 		
+		return diasTotales;
 	}
 //INTENTO PARA GENERAR FECHA ALEATORIA IGUAL A FECHA while
-	public int intentosAcertarFechaWhile() throws MiExcepcion{
+	public int intentosAcertarFechaWhile() {
+		
 		int intentos=0;
-		Random randomNumer=new Random();
-		randomNumer.setSeed(System.currentTimeMillis());
-		Date fechaAleatoria = new Date(1,1,5000);
-		while(!isSame(fechaAleatoria)){
-
-			int diaAleatorio=randomNumer.nextInt(31)+1;
-			int mesAleatorio=randomNumer.nextInt(12)+1;
-
-			if(fechaCorrecta(diaAleatorio,mesAleatorio,año)){
-
-				fechaAleatoria=new Date(diaAleatorio,mesAleatorio,año);
-				intentos++;
+		
+		boolean caso=false;
+		
+		int d,m;
+		
+		while(caso==false){
 			
+			m=(int)(Math.random()*12)+1;
+			
+			if(m==4 || m==6 || m==9 || m==11){
+				d=(int)(Math.random()*30)+1;
+
 			}
+			else if(m==2){
+				d=(int)(Math.random()*28)+1;
+			}
+			else{
+				d=(int)(Math.random()*31)+1;
+			}
+				intentos++;
+				
+			if(m==this.month && d==this.day){
+				caso=true;
+			}
+			
 		}
-			System.out.println("Intentos "+intentos);
+			
 			return intentos;
 	}
-//INTENTO PARA GENERAR FECHA ALEATORIA IGUAL A FECHA do-while
-	public int intentosAcertarFecha(int day, int month){
-		int intentos=0;
-		
-		
-		Random randomNumer=new Random();
-		randomNumer.setSeed(System.currentTimeMillis());
-		Date fechaAleatoria = new Date(1,1,5000);
-		do{
-			int diaAleatorio=randomNumer.nextInt(31)+1;
-			int mesAleatorio=randomNumer.nextInt(12)+1;
 
-			if(fechaCorrecta(diaAleatorio,mesAleatorio,año)){
-
-				fechaAleatoria=new Date(diaAleatorio,mesAleatorio,año);
-				intentos++;
-			}
-		}
-		while(!isSame(fechaAleatoria));
-			System.out.println("Intentos "+intentos);
-
-	return intentos;
-		
-	}
+	
 
 
 //DIA DE LA SEMANA
